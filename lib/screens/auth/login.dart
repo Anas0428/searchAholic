@@ -202,7 +202,7 @@ class LoginScreen extends State<Login> {
                   Container(
                     margin: EdgeInsets.only(top: 0),
                     child: Text(
-                      "Searchaholic!",
+                      "ShopWise!",
                       style: GoogleFonts.montserrat(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
@@ -312,8 +312,8 @@ Future<bool> updateLoginFile(String email, String password) async {
   try {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    Directory folder = Directory('$path/SeachAHolic');
-    File file = File('$path/SeachAHolic/user.json');
+    Directory folder = Directory('$path/ShopWise');
+    File file = File('$path/ShopWise/user.json');
 
     if (await folder.exists() && file.existsSync()) {
       final userData = {"email": email, "password": password};
@@ -331,8 +331,8 @@ Future<bool> checkLoginFile() async {
   try {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    Directory folder = Directory('$path/SeachAHolic');
-    File file = File('$path/SeachAHolic/user.json');
+    Directory folder = Directory('$path/ShopWise');
+    File file = File('$path/ShopWise/user.json');
 
     return await folder.exists() && file.existsSync();
   } catch (e) {
@@ -344,7 +344,7 @@ Future<List<String>> getDetails() async {
   try {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    File file = File('$path/SeachAHolic/user.json');
+    File file = File('$path/ShopWise/user.json');
 
     String fileContent = file.readAsStringSync().trim();
 

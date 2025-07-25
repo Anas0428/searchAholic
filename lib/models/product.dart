@@ -1,9 +1,9 @@
 import 'package:firedart/firedart.dart';
 import 'package:firedart/firestore/firestore.dart';
-import 'package:searchaholic/screens/products/add_product.dart';
-import 'package:searchaholic/utils/imports.dart';
-import 'package:searchaholic/widgets/product_card.dart';
-import 'package:searchaholic/widgets/sidebar.dart';
+import 'package:shopwise/screens/products/add_product.dart';
+import 'package:shopwise/utils/imports.dart';
+import 'package:shopwise/widgets/product_card.dart';
+import 'package:shopwise/widgets/sidebar.dart';
 
 class Product extends StatefulWidget {
   const Product({super.key});

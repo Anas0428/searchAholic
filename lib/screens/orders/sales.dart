@@ -1,8 +1,8 @@
 import 'package:firedart/firestore/firestore.dart';
-import 'package:searchaholic/utils/imports.dart';
+import 'package:shopwise/utils/imports.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:searchaholic/widgets/sidebar.dart';
+import 'package:shopwise/widgets/sidebar.dart';
 
 class Sales extends StatefulWidget {
   const Sales({super.key});

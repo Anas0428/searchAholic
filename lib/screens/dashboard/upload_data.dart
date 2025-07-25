@@ -2,8 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:searchaholic/services/firebase_.dart';
-import 'package:searchaholic/widgets/sidebar.dart';
+import 'package:shopwise/services/firebase_.dart';
+import 'package:shopwise/widgets/sidebar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UploadData extends StatefulWidget {

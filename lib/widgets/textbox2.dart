@@ -22,21 +22,6 @@ Expanded textbox2(
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.25,
         child: InkWell(
-          // onTap: () {
-          //   print(text);
-          //   if (text == "Add Product") {
-          //     Navigator.pushReplacement(context,
-          //         MaterialPageRoute(builder: (context) => const AddProduct()));
-          //   }
-          //   if (text == "Search Product") {
-          //     Navigator.pushReplacement(context,
-          //         MaterialPageRoute(builder: (context) => const Product()));
-          //   }
-          //   if (text == "New Order") {
-          //     Navigator.pushReplacement(
-          //         context, MaterialPageRoute(builder: (context) => newOrder()));
-          //   }
-          // },
           child: Container(
             height: MediaQuery.of(context).size.width * 0.12,
             decoration: BoxDecoration(

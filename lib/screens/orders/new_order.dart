@@ -3,8 +3,8 @@
 import 'package:firedart/firedart.dart';
 import 'package:flutter/services.dart';
 import 'package:quickalert/quickalert.dart';
-import 'package:searchaholic/widgets/order_card.dart';
-import 'package:searchaholic/widgets/sidebar.dart';
+import 'package:shopwise/widgets/order_card.dart';
+import 'package:shopwise/widgets/sidebar.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../utils/imports.dart';

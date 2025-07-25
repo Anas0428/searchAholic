@@ -10,8 +10,8 @@
 // import 'package:flutter/services.dart' show rootBundle;
 // import 'package:quickalert/models/quickalert_type.dart';
 // import 'package:quickalert/widgets/quickalert_dialog.dart';
-// import 'package:searchaholic/models/product.dart';
-// import 'package:searchaholic/widgets/sidebar.dart';
+// import 'package:shopwise/models/product.dart';
+// import 'package:shopwise/widgets/sidebar.dart';
 // import 'package:d_chart/d_chart.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:intl/intl.dart';
@@ -268,7 +268,7 @@
 // }
 
 import 'package:firedart/firedart.dart';
-import 'package:searchaholic/widgets/sidebar.dart';
+import 'package:shopwise/widgets/sidebar.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 import '../../utils/imports.dart';

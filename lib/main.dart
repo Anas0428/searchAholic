@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:firedart/firedart.dart';
 
 const apiKey = "AIzaSyCjZK5ojHcJQh8Sr0sdMG0Nlnga4D94FME";
-const projectId = "searchaholic-86248";
+const projectId = "shopwise-86248";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +17,7 @@ void main() async {
     } catch (e) {
       debugPrint('Error initializing Firestore: $e');
     }
-    
+
     // Create necessary files and folders
     try {
       createFilesAndFolders();
@@ -25,7 +25,7 @@ void main() async {
       debugPrint('Error creating files and folders: $e');
     }
   }
-  
+
   runApp(MyApp());
 }
 
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Login(),
     );
   }
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
 void createFilesAndFolders() async {
   final Directory directory = await getApplicationDocumentsDirectory();
   final String path = directory.path;
-  final Directory appFolder = Directory('$path/SeachAHolic');
+  final Directory appFolder = Directory('$path/ShopWise');
 
   // Create app folder if it doesn't exist
   if (!appFolder.existsSync()) {
@@ -52,14 +53,10 @@ void createFilesAndFolders() async {
   }
 
   // Create required files if they don't exist
-  final List<String> requiredFiles = [
-    'products.csv',
-    'user.json', 
-    'logs.txt'
-  ];
-  
+  final List<String> requiredFiles = ['products.csv', 'user.json', 'logs.txt'];
+
   for (String fileName in requiredFiles) {
-    final File file = File('$path/SeachAHolic/$fileName');
+    final File file = File('$path/ShopWise/$fileName');
     if (!file.existsSync()) {
       await file.create();
     }

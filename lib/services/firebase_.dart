@@ -1,11 +1,12 @@
 import 'dart:convert';
 import '../utils/imports.dart';
+import '../utils/local_auth.dart';
 import 'package:firedart/firedart.dart';
 import 'package:crypto/crypto.dart';
 import 'package:csv/csv.dart';
 
 const apiKey = "AIzaSyCjZK5ojHcJQh8Sr0sdMG0Nlnga4D94FME";
-const projectId = "searchaholic-86248";
+const projectId = "shopwise-86248";
 
 class FlutterApi {
   // Main Function
@@ -20,7 +21,7 @@ class FlutterApi {
     try {
       Directory directory = await getApplicationDocumentsDirectory();
       String path = directory.path;
-      File file = File('$path/SeachAHolic/user.json');
+File file = File('$path/ShopWise/user.json');
 
       // Check if file exists
       if (!file.existsSync()) {
@@ -60,6 +61,16 @@ class FlutterApi {
   // checking login of members
   Future<bool> checkLogin(String email, String password) async {
     debugPrint('checkLogin called with email: $email');
+
+    // First, try local data.json authentication
+    try {
+      if (await LocalAuth.checkLocalLogin(email, password)) {
+        debugPrint('Local data.json authentication successful');
+        return true;
+      }
+    } catch (e) {
+      debugPrint('Local data.json authentication failed: $e');
+    }
 
     // if internet is not connected then login offline (with the credentials saved from the last login)
     try {
@@ -210,10 +221,10 @@ class FlutterApi {
   Future<bool> forgetPassword(String email1, String password) async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    // Directory folder = Directory('path/SeachAHolic'); // Removed unused variable
+    // Directory folder = Directory('path/ShopWise'); // Removed unused variable
 
     // getting the email from the user.json file
-    File file = File('$path/SeachAHolic/user.json');
+File file = File('$path/ShopWise/user.json');
     String email = jsonDecode(file.readAsStringSync())['email'];
     try {
       // Adding the product to the database
@@ -294,10 +305,10 @@ class FlutterApi {
   getEmail() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    Directory folder = Directory('$path/SeachAHolic');
+Directory folder = Directory('$path/ShopWise');
 
     // getting the email from the user.json file
-    File file = File('$path/SeachAHolic/user.json');
+    File file = File('$path/ShopWise/user.json');
     String email = jsonDecode(file.readAsStringSync())['email'];
     return email;
   }

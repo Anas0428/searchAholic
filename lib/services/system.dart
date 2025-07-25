@@ -11,7 +11,7 @@ class System {
     Directory directory = await getApplicationDocumentsDirectory();
     print(directory.path);
     String path = directory.path;
-    Directory folder = Directory('$path/SeachAHolic');
+    Directory folder = Directory('$path/ShopWise');
 
     // IF There is No Folder in the Document Directory
     if (!folder.existsSync()) {
@@ -19,21 +19,21 @@ class System {
     }
 
     // Otherwise Check the File is Already Exists or Not
-    File file = File('$path/SeachAHolic/products.csv');
+    File file = File('$path/ShopWise/products.csv');
     if (!file.existsSync()) {
       file.create();
       print("products.csv File Created");
     }
 
     // Checking Other Files
-    File file2 = File('$path/SeachAHolic/user.json');
+    File file2 = File('$path/ShopWise/user.json');
     if (!file2.existsSync()) {
       file2.create();
       print("user.json File Created");
     }
 
     // Logs File
-    File file3 = File('$path/SeachAHolic/logs.txt');
+    File file3 = File('$path/ShopWise/logs.txt');
     if (!file3.existsSync()) {
       file3.create();
       print("logs.txt File Created");
@@ -45,7 +45,7 @@ class System {
     // Getting the File
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    File file = File('$path/SeachAHolic/logs.txt');
+    File file = File('$path/ShopWise/logs.txt');
 
     // Writing the File
     file.writeAsString(log, mode: FileMode.append);
@@ -56,7 +56,7 @@ class System {
     // Getting the File
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    File file = File('$path/SeachAHolic/user.json');
+    File file = File('$path/ShopWise/user.json');
 
     // Reading the Email  and Password from JSON File
     String data = await file.readAsString();
@@ -74,7 +74,7 @@ class System {
     try {
       Directory directory = await getApplicationDocumentsDirectory();
       String path = directory.path;
-      File file = File('$path/SeachAHolic/user.json');
+      File file = File('$path/ShopWise/user.json');
 
       // Writing the File
       file.writeAsString(jsonEncode({'email': email, 'password': password}));

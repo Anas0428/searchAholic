@@ -5,8 +5,8 @@ import 'package:firedart/firestore/firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:searchaholic/models/product.dart';
-import 'package:searchaholic/widgets/sidebar.dart';
+import 'package:shopwise/models/product.dart';
+import 'package:shopwise/widgets/sidebar.dart';
 import '../../utils/imports.dart';
 import 'package:intl/intl.dart';
 

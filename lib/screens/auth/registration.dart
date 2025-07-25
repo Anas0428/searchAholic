@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:searchaholic/utils/imports.dart';
+import 'package:shopwise/utils/imports.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:email_otp/email_otp.dart';
 
@@ -90,8 +90,8 @@ class _SignUpState extends State<SignUp> {
   EmailOTP myauth = EmailOTP();
   void sendOTP() async {
     myauth.setConfig(
-        appEmail: "muhammad.saim.techno@gmail.com",
-        appName: "Searchaholic",
+        appEmail: "ShopWise@gmail.com",
+        appName: "ShopWise",
         userEmail: _emailController.text,
         otpLength: 4,
         otpType: OTPType.digitsOnly);
@@ -506,7 +506,7 @@ class _SignUpState extends State<SignUp> {
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   child: Text(
-                    'Welcome to SearchAHolic',
+                    'Welcome to ShopWise',
                     style: GoogleFonts.montserrat(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,

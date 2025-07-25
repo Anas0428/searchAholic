@@ -1,7 +1,13 @@
 {
-  "123123123": {
-    "name": "John Doe",
-    "email": "asdfsdaf,com",
-    "phone": "123123123"
+  "users": {
+    "afaqakbar085@gmail.com": {
+      "name": "Afaq akbar",
+      "email": "afaqakbar085@gmail.com",
+      "password": "admin123",
+      "phone": "123456789",
+      "address": "123 Admin St, Admin City",
+      "storeName": "My Store"
+    }
+    
   }
 }

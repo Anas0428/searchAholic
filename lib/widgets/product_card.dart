@@ -3,9 +3,9 @@
 import 'dart:convert';
 
 import 'package:firedart/firestore/firestore.dart';
-import 'package:searchaholic/screens/products/edit_product.dart';
-import 'package:searchaholic/utils/imports.dart';
-import 'package:searchaholic/models/product.dart';
+import 'package:shopwise/screens/products/edit_product.dart';
+import 'package:shopwise/utils/imports.dart';
+import 'package:shopwise/models/product.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
@@ -225,7 +225,7 @@ class ProductCard extends StatelessWidget {
     String path = directory.path;
 
     // getting the email from the user.json file
-    File file = File('$path/SeachAHolic/user.json');
+    File file = File('$path/ShopWise/user.json');
     String email = jsonDecode(file.readAsStringSync())['email'];
 
     return Future<String>.value(email);

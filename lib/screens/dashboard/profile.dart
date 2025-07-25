@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:firedart/firedart.dart';
 import 'package:firedart/firestore/firestore.dart';
-import 'package:searchaholic/utils/imports.dart';
-import 'package:searchaholic/widgets/sidebar.dart';
+import 'package:shopwise/utils/imports.dart';
+import 'package:shopwise/widgets/sidebar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -21,7 +21,7 @@ class _ProfileState extends State<Profile> {
   Future<void> _getProfile() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    File file = File('$path/SeachAHolic/user.json');
+    File file = File('$path/ShopWise/user.json');
     String email = jsonDecode(file.readAsStringSync())['email'];
 
     var storeData = Firestore.instance.collection(email);
@@ -170,33 +170,6 @@ class _ProfileState extends State<Profile> {
                       ),
                     )),
               ),
-
-              ///Edit Button
-              // Container(
-              //   margin: EdgeInsets.only(
-              //       top: MediaQuery.of(context).size.height * 0.057),
-              //   child: ElevatedButton(
-              //     onPressed: () {
-              //       // print value is updated
-              //       print("Profile Updated");
-              //       /*Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => EditProduct(
-              //                   email: '',
-              //                   productID: '',
-              //                 )),
-              //       );*/
-              //     },
-              //     style: ElevatedButton.styleFrom(
-              //       primary: Colors.blue,
-              //       shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(10)),
-              //     ),
-              //     child: const Text("Update",
-              //         style: TextStyle(color: Colors.white)),
-              //   ),
-              // ),
             ]),
           ),
         ),

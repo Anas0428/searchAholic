@@ -1,9 +1,9 @@
-import 'package:searchaholic/widgets/sidebar.dart';
-import 'package:searchaholic/widgets/text_box.dart';
+import 'package:shopwise/widgets/sidebar.dart';
+import 'package:shopwise/widgets/text_box.dart';
 import 'package:firedart/firestore/firestore.dart';
 import 'package:firedart/firedart.dart';
 import 'dart:convert';
-import 'package:searchaholic/utils/imports.dart';
+import 'package:shopwise/utils/imports.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -26,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
 
-    File userFile = File('$path/SeachAHolic/user.json');
+    File userFile = File('$path/ShopWise/user.json');
     try {
       if (!userFile.existsSync()) {
         debugPrint("User file does not exist");

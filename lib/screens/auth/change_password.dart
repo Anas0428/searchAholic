@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:firedart/firestore/firestore.dart';
-import 'package:searchaholic/utils/imports.dart';
+import 'package:shopwise/utils/imports.dart';
 import 'package:quickalert/quickalert.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -344,7 +344,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     child: Text(
-                      'SearchaHolic',
+                      'ShopWise',
                       style: GoogleFonts.montserrat(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -367,7 +367,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
 
-    File file = File('$path/SeachAHolic/user.json');
+    File file = File('$path/ShopWise/user.json');
     String email = jsonDecode(file.readAsStringSync())['email'];
 
     var collection = Firestore.instance.collection(email);
@@ -392,7 +392,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
 
-    File file = File('$path/SeachAHolic/user.json');
+    File file = File('$path/ShopWise/user.json');
     String email = jsonDecode(file.readAsStringSync())['email'];
     
     try {

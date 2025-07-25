@@ -1,4 +1,4 @@
-import 'package:searchaholic/utils/imports.dart';
+import 'package:shopwise/utils/imports.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:email_otp/email_otp.dart';
 
@@ -83,8 +83,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   void _sendOTP() async {
     _emailOtp.setConfig(
-        appEmail: "Searchaholic@gmail.com",
-        appName: "Searchaholic",
+        appEmail: "ShopWise@gmail.com",
+        appName: "ShopWise",
         userEmail: _emailController.text,
         otpLength: 4,
         otpType: OTPType.digitsOnly);
@@ -413,7 +413,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   child: Text(
-                    'SearchaHolic',
+                    'ShopWise',
                     style: GoogleFonts.montserrat(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
