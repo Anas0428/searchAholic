@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:firedart/firedart.dart';
 
 const apiKey = "AIzaSyCjZK5ojHcJQh8Sr0sdMG0Nlnga4D94FME";
-const projectId = "shopwise-86248";
+const projectId = "searchaholic-86248";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

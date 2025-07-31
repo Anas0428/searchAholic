@@ -180,24 +180,27 @@ class _ProductState extends State<Product> {
 
     FlutterApi().getAllProducts().then(
           (value) => {
-            value,
-            value.map.forEach((key, value) {
-              setState(() {
-                try {
-                  products.add({
-                    "Name": value['Name'],
-                    "Price": value['Price'],
-                    "Quantity": value['Quantity'],
-                    "StoreId": value['StoreId'],
-                    "ProductId": value['ProductId'],
-                    "Type": value['Type'],
-                    "id": key,
-                  });
-                } catch (e) {
-                  // Handle error silently
-                }
-              });
-            })
+            if (value != null) {
+              value.map.forEach((key, productData) {
+                setState(() {
+                  try {
+                    products.add({
+                      "Name": productData['Name'],
+                      "Price": productData['Price'],
+                      "Quantity": productData['Quantity'],
+                      "StoreId": productData['StoreId'],
+                      "ProductId": productData['ProductId'],
+                      "Type": productData['Type'],
+                      "id": key,
+                    });
+                  } catch (e) {
+                    debugPrint('Error adding product to list: $e');
+                  }
+                });
+              })
+            } else {
+              debugPrint('No products found - document is null')
+            }
           },
         );
   }

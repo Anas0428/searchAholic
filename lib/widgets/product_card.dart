@@ -14,133 +14,147 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.15,
+      margin: EdgeInsets.symmetric(
+        vertical: MediaQuery.of(context).size.height * 0.01,
+        horizontal: MediaQuery.of(context).size.width * 0.02,
+      ),
       child: Card(
-        margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.02,
-        ),
-        shadowColor: Colors.grey[50],
-        elevation: 3,
+        shadowColor: Colors.grey[300],
+        elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(15.0),
         ),
-        color: Colors.grey[50],
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.02,
-                top: MediaQuery.of(context).size.height * 0.12,
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.12,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  product['Name'],
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w400,
-                    fontSize: MediaQuery.of(context).size.width / 80,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.06)),
-            SizedBox(
-                width: MediaQuery.of(context).size.width * 0.07,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.02,
-                  ),
-                  transformAlignment: Alignment.center,
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Qty: ' + product['Quantity'].toString(),
-                    style: TextStyle(
-                      fontFamily: "Montserrat",
-                      color: Color.fromARGB(255, 74, 135, 249),
-                      fontWeight: FontWeight.w100,
-                      fontSize: 15,
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              // Product Name
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      product['Name'] ?? 'Unknown Product',
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.black87,
+                      ),
                     ),
-                  ),
-                )),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.15,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.02,
-                ),
-                transformAlignment: Alignment.center,
-                alignment: Alignment.center,
-                child: Text(
-                  "Rs. ${product['Price']}",
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Color.fromARGB(255, 231, 79, 87),
-                    fontWeight: FontWeight.w100,
-                    fontSize: 15,
-                  ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Type: ${product['Type'] ?? 'N/A'}',
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.10,
-              child: Container(
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.03,
+              
+              // Quantity
+              Expanded(
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Quantity',
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 74, 135, 249).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        '${product['Quantity'] ?? '0'}',
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Color.fromARGB(255, 74, 135, 249),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Color.fromARGB(255, 74, 135, 249),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.03,
-                    height: MediaQuery.of(context).size.height * 0.03,
-                    alignment: Alignment.center,
-                    transformAlignment: Alignment.center,
-                    child: TextButton(
+              ),
+              
+              // Price
+              Expanded(
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Price',
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Rs. ${product['Price'] ?? '0'}',
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 231, 79, 87),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              // Actions
+              Expanded(
+                flex: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Edit Button
+                    ElevatedButton(
                       onPressed: () {
                         navigate(context, product["id"]);
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 74, 135, 249),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      ),
                       child: Text(
                         "Edit",
                         style: TextStyle(
                           fontFamily: "Montserrat",
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: MediaQuery.of(context).size.width / 110,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.10,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.03,
-                ),
-                child: Card(
-                  color: Color.fromARGB(255, 255, 125, 125),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.04,
-                    height: MediaQuery.of(context).size.height * 0.03,
-                    alignment: Alignment.center,
-                    transformAlignment: Alignment.center,
-                    child: TextButton(
+                    
+                    // Delete Button
+                    ElevatedButton(
                       onPressed: () {
                         // Delete product
                         var productID = product["id"];
@@ -185,21 +199,28 @@ class ProductCard extends StatelessWidget {
                           },
                         );
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 255, 125, 125),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      ),
                       child: Text(
                         "Delete",
                         style: TextStyle(
                           fontFamily: "Montserrat",
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: MediaQuery.of(context).size.width / 110,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

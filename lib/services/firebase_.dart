@@ -6,14 +6,21 @@ import 'package:crypto/crypto.dart';
 import 'package:csv/csv.dart';
 
 const apiKey = "AIzaSyCjZK5ojHcJQh8Sr0sdMG0Nlnga4D94FME";
-const projectId = "shopwise-86248";
+const projectId = "searchaholic-86248";
+const databaseSecret = "hAfHBtdXEoDdG0djOnXaMYYwEQ7Q6aWP7f4q54Mg";
 
 class FlutterApi {
   // Main Function
   void main() async {
     WidgetsFlutterBinding.ensureInitialized();
-    Firestore.initialize(projectId); // Establishing connection with Firestore
-    debugPrint("Firestore Initialized");
+    try {
+      // Initialize Firestore with authentication
+      Firestore.initialize(projectId);
+      FirebaseAuth.initialize(apiKey, VolatileStore());
+      debugPrint("Firestore Initialized with project: $projectId");
+    } catch (e) {
+      debugPrint("Error initializing Firebase: $e");
+    }
   }
 
   // check offline login
@@ -155,42 +162,46 @@ File file = File('$path/ShopWise/user.json');
     List storeDetails = await getStoreDetails();
 
     try {
-      Document x = await getAllProducts();
-      Map<String, dynamic> data =
-          x.map; //Maping the data to the data variable (Map<String, dynamic>)
+      Document? existingDoc = await getAllProducts();
+      Map<String, dynamic> data = {};
+      
+      // If document exists, use existing data, otherwise start with empty map
+      if (existingDoc != null) {
+        data = Map<String, dynamic>.from(existingDoc.map);
+      }
 
-      // Cecking if the product is already present add the quantity
+      // Check if the product is already present and add the quantity
       if (data.containsKey(productID)) {
         int prevQty = int.parse(data[productID]['Quantity']);
         int newQty = prevQty + int.parse(productQty);
         data[productID]['Quantity'] = newQty.toString();
+        debugPrint("Updated existing product quantity: $newQty");
       } else {
-        debugPrint(data.length.toString());
-        // Adding the product to the product collection (prevData
-        data.addAll({
-          productID: {
-            'Name': productName,
-            'Quantity': productQty,
-            'Price': productPrice,
-            'Type': productType,
-            'Expiry': "Not Set",
-            'Category': "Not Set",
-            "StoreId": storeID,
-            "ProductId": productID,
-            "StoreName": storeDetails[0],
-            "StoreLocation": GeoPoint(
-                double.parse(storeDetails[1]), double.parse(storeDetails[2])),
-          },
-        });
+        debugPrint("Adding new product. Current products count: ${data.length}");
+        // Adding the product to the product collection
+        data[productID] = {
+          'Name': productName,
+          'Quantity': productQty,
+          'Price': productPrice,
+          'Type': productType,
+          'Expiry': "Not Set",
+          'Category': "Not Set",
+          "StoreId": storeID,
+          "ProductId": productID,
+          "StoreName": storeDetails[0],
+          "StoreLocation": GeoPoint(
+              double.parse(storeDetails[1]), double.parse(storeDetails[2])),
+        };
       }
+      
       await Firestore.instance
           .collection("Products")
           .document(storeID)
           .set(data);
+      debugPrint("Product added/updated successfully");
       return Future<bool>.value(true);
     } catch (e) {
-      debugPrint(e.toString());
-      debugPrint("Not Connected to the Internet");
+      debugPrint("Error adding product: $e");
       return Future<bool>.value(false);
     }
   }
@@ -437,7 +448,7 @@ Directory folder = Directory('$path/ShopWise');
     }
   }
 
-  Future<Document> getAllProducts() async {
+  Future<Document?> getAllProducts() async {
     final storeId = generateStoreId(await getEmail());
 
     try {
@@ -446,11 +457,16 @@ Directory folder = Directory('$path/ShopWise');
           .document(storeId)
           .get();
 
-      return Future<Document>.value(data);
+      // Check if document exists and has data
+      if (data.map.isEmpty) {
+        debugPrint("No Products Found - Document is empty");
+        return null;
+      }
+
+      return data;
     } catch (e) {
-      debugPrint("No Products Found");
-      // ignore: null_argument_to_non_null_type
-      return Future<Document>.value(null);
+      debugPrint("Error getting products: $e");
+      return null;
     }
   }
 }

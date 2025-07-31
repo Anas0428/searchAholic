@@ -393,7 +393,11 @@ class _AddProduct extends State<AddProduct> {
     final storeId = FlutterApi().generateStoreId(email);
 
     // Add Product to the Map
-    final map = await addDataToMap(data.map, email);
+    Map<String, dynamic> existingMap = {};
+    if (data != null) {
+      existingMap = Map<String, dynamic>.from(data.map);
+    }
+    final map = await addDataToMap(existingMap, email);
 
     // Update the Database
     await Firestore.instance.collection("Products").document(storeId).set(map);

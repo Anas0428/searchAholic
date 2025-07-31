@@ -331,6 +331,12 @@ Future<bool> updateProduct(String name, String price, String qty, String type,
     String email, String productID) async {
   var x = FlutterApi().generateStoreId(email);
   final data = await FlutterApi().getAllProducts();
+  
+  if (data == null) {
+    debugPrint("No products found to update");
+    return false;
+  }
+  
   var product =
       await Firestore.instance.collection("Products").document(x).get();
 
