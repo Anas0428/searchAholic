@@ -14,10 +14,10 @@ class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
 
   @override
-  _AddProduct createState() => _AddProduct();
+  State<AddProduct> createState() => _AddProductState();
 }
 
-class _AddProduct extends State<AddProduct> {
+class _AddProductState extends State<AddProduct> {
   // Controllers for the TextFields
   final TextEditingController _productName = TextEditingController();
   final TextEditingController _productPrice = TextEditingController();
@@ -187,11 +187,11 @@ class _AddProduct extends State<AddProduct> {
                                 lastDate: DateTime(2100));
 
                             if (pickedDate != null) {
-                              print(
-                                  pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                              debugPrint(
+                                  pickedDate.toString()); //pickedDate output format => 2021-03-10 00:00:00.000
                               String formattedDate =
                                   DateFormat('yyyy-MM-dd').format(pickedDate);
-                              print(
+                              debugPrint(
                                   formattedDate); //formatted date output using intl package =>  2021-03-16
                               //you can implement different kind of Date Format here according to your requirement
 
@@ -200,7 +200,7 @@ class _AddProduct extends State<AddProduct> {
                                     formattedDate; //set output date to TextField value.
                               });
                             } else {
-                              print("Date is not selected");
+                              debugPrint("Date is not selected");
                             }
                           },
                         ))),
@@ -227,8 +227,8 @@ class _AddProduct extends State<AddProduct> {
                         ],
                         onChanged: (value) {
                           _productType.text = value.toString();
-                          print(value);
-                          print(_productType.text);
+                          debugPrint(value.toString());
+                          debugPrint(_productType.text);
                         },
                         hint: const Text(
                           "Select Product Visibility",
@@ -361,12 +361,12 @@ class _AddProduct extends State<AddProduct> {
     // Generating key of the Product
     final productId = FlutterApi().generateProductId(_productName.text);
 
-    var Details = await Firestore.instance
+    var details = await Firestore.instance
         .collection(email)
         .document("Store Details")
         .get();
 
-    print(Details);
+    debugPrint(details.toString());
 
     map.putIfAbsent(
         productId,
@@ -378,9 +378,9 @@ class _AddProduct extends State<AddProduct> {
               "storeEmail": email,
               "Type": _productType.text,
               "ProductID": productId,
-              "StoreId": Details["storeId"],
-              "StoreLocation": Details["storeLocation"],
-              "StoreName": Details["storeName"],
+              "StoreId": details["storeId"],
+              "StoreLocation": details["storeLocation"],
+              "StoreName": details["storeName"],
               "Category": _productCategory.text,
             });
 

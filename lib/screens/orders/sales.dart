@@ -45,7 +45,7 @@ class _SalesState extends State<Sales> {
   @override
   void initState() {
     super.initState();
-    print("Getting recent orders...");
+    debugPrint("Getting recent orders...");
     getRecentOrders().then((value) => {
           setState(() {
             recentOrders = value;
@@ -316,7 +316,7 @@ class _SalesState extends State<Sales> {
                     scrollDirection: Axis.vertical,
                     itemCount: products.length,
                     itemBuilder: (context, index) {
-                      print(index.toString());
+                      debugPrint(index.toString());
                       return ListTile(
                         title: Text(products.keys.toList()[index]),
                         subtitle: Text("x ${products.values.toList()[index]}"),

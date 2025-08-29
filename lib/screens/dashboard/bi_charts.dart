@@ -276,7 +276,7 @@ import '../../utils/imports.dart';
 class BiCharts extends StatefulWidget {
   const BiCharts({super.key});
   @override
-  _BiChartsState createState() => _BiChartsState();
+  State<BiCharts> createState() => _BiChartsState();
 }
 
 // TooltipBehavior _tooltipBehavior;
@@ -510,7 +510,7 @@ class _BiChartsState extends State<BiCharts> {
     listMappedEntries.sort((a, b) => a.key.compareTo(b.key));
     final Map<DateTime, int> sortedMapData = Map.fromEntries(listMappedEntries);
 
-    print(sortedMapData);
+    debugPrint(sortedMapData.toString());
     for (var i in sortedMapData.keys) {
       if (dailyDataMap.containsKey(i.toString().split(" ")[0])) {
         dailyDataMap[i.toString().split(" ")[0]] =

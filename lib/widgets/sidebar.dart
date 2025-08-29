@@ -17,7 +17,7 @@ class Sidebar extends StatefulWidget {
   const Sidebar({super.key});
 
   @override
-  _SidebarState createState() => _SidebarState();
+  State<Sidebar> createState() => _SidebarState();
 }
 
 class _SidebarState extends State<Sidebar> {

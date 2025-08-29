@@ -38,10 +38,10 @@ void main() {
       .cast<File>()
       .toList();
 
-  print('Found ${dartFiles.length} Dart files to process...');
+  // Found ${dartFiles.length} Dart files to process...
 
   for (final file in dartFiles) {
-    print('Processing: ${file.path}');
+    // Processing: ${file.path}
     
     String content = file.readAsStringSync();
     bool modified = false;
@@ -54,7 +54,7 @@ void main() {
       if (content.contains(oldImport)) {
         content = content.replaceAll(oldImport, newImport);
         modified = true;
-        print('  Fixed: ${entry.key} -> ${entry.value}');
+        // Fixed: ${entry.key} -> ${entry.value}
       }
     }
 
@@ -82,7 +82,7 @@ void main() {
             
             if (updatedLine != line) {
               modified = true;
-              print('  Fixed relative import: ${entry.key} -> $relativePath');
+              // Fixed relative import: ${entry.key} -> $relativePath
             }
             break;
           }
@@ -96,12 +96,12 @@ void main() {
     if (modified) {
       content = updatedLines.join('\n');
       file.writeAsStringSync(content);
-      print('  ✓ Updated ${file.path}');
+      // ✓ Updated ${file.path}
     }
   }
 
-  print('\nImport fixing completed!');
-  print('Run "flutter analyze" to check for any remaining issues.');
+  // Import fixing completed!
+  // Run "flutter analyze" to check for any remaining issues.
 }
 
 String _calculateRelativePath(String fromPath, String toPath) {

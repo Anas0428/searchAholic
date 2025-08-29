@@ -9,11 +9,11 @@ class Product extends StatefulWidget {
   const Product({super.key});
 
   @override
-  _ProductState createState() => _ProductState();
+  State<Product> createState() => _ProductState();
 }
 
 class _ProductState extends State<Product> {
-  List<Object> products = [];
+  List<Map<String, dynamic>> products = [];
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -81,7 +81,7 @@ class _ProductState extends State<Product> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Colors.grey.withValues(alpha: 0.5),
                           spreadRadius: 1,
                           blurRadius: 7,
                           offset: const Offset(0, 3),

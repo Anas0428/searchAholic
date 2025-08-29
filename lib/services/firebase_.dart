@@ -120,12 +120,12 @@ File file = File('$path/ShopWise/user.json');
   }
 
   // Registration
-  Future<bool> register(String email, String storeName, String Location,
+  Future<bool> register(String email, String storeName, String location,
       String phNo, String password) async {
     // Splitting the Location
-    List<String> location = Location.split(",");
-    String lat = location[0];
-    String long = location[1];
+    List<String> locationParts = location.split(",");
+    String lat = locationParts[0];
+    String long = locationParts[1];
 
     // Checking if the email is already registered
     final managers = Firestore.instance.collection(email);
@@ -232,10 +232,8 @@ File file = File('$path/ShopWise/user.json');
   Future<bool> forgetPassword(String email1, String password) async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-    // Directory folder = Directory('path/ShopWise'); // Removed unused variable
-
     // getting the email from the user.json file
-File file = File('$path/ShopWise/user.json');
+    File file = File('$path/ShopWise/user.json');
     String email = jsonDecode(file.readAsStringSync())['email'];
     try {
       // Adding the product to the database
@@ -316,7 +314,7 @@ File file = File('$path/ShopWise/user.json');
   getEmail() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
-Directory folder = Directory('$path/ShopWise');
+    // Directory folder = Directory('$path/ShopWise'); // UNUSED
 
     // getting the email from the user.json file
     File file = File('$path/ShopWise/user.json');
@@ -436,11 +434,11 @@ Directory folder = Directory('$path/ShopWise');
     }
   }
 
-  Future<bool> adddProduct(Map<String, dynamic> Data) async {
+  Future<bool> adddProduct(Map<String, dynamic> data) async {
     try {
       final storeId = generateStoreId(await getEmail());
       // Uploading the Product to the database
-      Firestore.instance.collection("Products").document(storeId).set(Data);
+      Firestore.instance.collection("Products").document(storeId).set(data);
       return Future<bool>.value(true);
     } catch (e) {
       debugPrint(e.toString());

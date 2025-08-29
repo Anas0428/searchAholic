@@ -69,7 +69,7 @@ class _newOrderState extends State<newOrder> {
     products.clear();
     searchProducts.clear();
     getProducts().then((value) => {
-          print("Products Fetched"),
+          debugPrint("Products Fetched"),
         });
     getprofile();
   }
@@ -214,7 +214,7 @@ class _newOrderState extends State<newOrder> {
                                   child: ListView.builder(
                                     itemCount: selectedProducts.length,
                                     itemBuilder: (context, index) {
-                                      print(selectedProducts[index]);
+                      debugPrint(selectedProducts[index].toString());
                                       return GestureDetector(
                                         onTap: () => {
                                           setState(
@@ -281,8 +281,7 @@ class _newOrderState extends State<newOrder> {
                             ),
                             Expanded(
                                 flex: 1,
-                                child: Container(
-                                  child: Row(
+                                child: Row(
                                     children: [
                                       Expanded(
                                         flex: 1,
@@ -339,7 +338,7 @@ class _newOrderState extends State<newOrder> {
                                       ),
                                     ],
                                   ),
-                                ))
+                                ),
                           ],
                         ),
                       ),
@@ -693,13 +692,15 @@ class _newOrderState extends State<newOrder> {
                 msg =
                     "$Store_name\nSales Invoice\nAddress: $address_l1,$address_l2\nTel #: $Phone_number\nDate & Time: $date\nCustomer Tel #: ${_emailController.text}\n${selectedProducts[0]['name']}  Rs. ${selectedProducts[0]['price']} x ${selectedProducts[0]['quantity']}\nSales Tax:0\nDiscount:0\nTotal Amount:$totalBill\nThank You for choosing $Store_name\nFor feedback @ $Email\n";
                 if (await updateProductsQuantity()) {
-                  print("Products Quantity Updated Successfully");
+                  debugPrint("Products Quantity Updated Successfully");
                 }
                 Share.share(msg);
                 // ignore: duplicate_ignore
                 // ignore: unused_local_variable
 
-                Navigator.pop(context);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                }
                 if (await FlutterApi().addOrder(
                         selectedProducts, totalBill, _emailController.text) ==
                     true) {
@@ -708,9 +709,11 @@ class _newOrderState extends State<newOrder> {
                     totalBill = 0;
                   });
                 }
-                Navigator.push(
-                    context, // Adding Product
-                    MaterialPageRoute(builder: (context) => const newOrder()));
+                if (context.mounted) {
+                  Navigator.push(
+                      context, // Adding Product
+                      MaterialPageRoute(builder: (context) => const newOrder()));
+                }
 
                 // Adding the Invoice to the Database
                 // Updating the Products Quantity
@@ -852,7 +855,7 @@ class _newOrderState extends State<newOrder> {
                           .toString(); // Updating the quantity
 
                       totalBill += (controlerQty * productPrice);
-                      print("Total Bill: $totalBill");
+                      debugPrint("Total Bill: $totalBill");
                     });
                   }
                 }

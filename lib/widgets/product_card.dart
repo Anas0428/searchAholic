@@ -9,7 +9,7 @@ import 'package:shopwise/models/product.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
-  final product;
+  final Map<String, dynamic> product;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,7 +78,7 @@ class ProductCard extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 74, 135, 249).withOpacity(0.1),
+                        color: Color.fromARGB(255, 74, 135, 249).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -177,19 +177,21 @@ class ProductCard extends StatelessWidget {
                                     // Delete product
                                     if (await deleteProduct(productID) ==
                                         true) {
-                                      Navigator.pop(context);
+                                      if (context.mounted) {
+                                        Navigator.pop(context);
 
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text("Product deleted, "),
-                                        ),
-                                      );
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Product()));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text("Product deleted, "),
+                                          ),
+                                        );
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Product()));
+                                      }
                                     }
                                   },
                                   child: const Text("Delete"),
@@ -227,17 +229,19 @@ class ProductCard extends StatelessWidget {
   }
 
   void navigate(context, productID) {
-    print("Navigating to edit product page...");
+    debugPrint("Navigating to edit product page...");
     getEmail().then((value) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EditProduct(
-            productID: productID,
-            email: value,
+      if (context.mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EditProduct(
+              productID: productID,
+              email: value,
+            ),
           ),
-        ),
-      );
+        );
+      }
     });
   }
 
@@ -256,7 +260,7 @@ class ProductCard extends StatelessWidget {
     map.remove(id);
     map.forEach((key, value) {
       if (key == id) {
-        print("Found the key to be deleted");
+        debugPrint("Found the key to be deleted");
         map.remove(key);
       }
     });
@@ -264,20 +268,20 @@ class ProductCard extends StatelessWidget {
   }
 
   Future<bool> deleteProduct(String id) async {
-    print("Product Deleted: " + id);
+    debugPrint("Product Deleted: $id");
 
     String email = await FlutterApi().getEmail();
     var x = FlutterApi().generateStoreId(email);
 
     // Deleting the Product from Firestore
     try {
-      final DATA =
+      final data =
           await Firestore.instance.collection("Products").document(x).get();
-      final map = removeMapData(DATA.map, id);
+      final map = removeMapData(data.map, id);
       await Firestore.instance.collection("Products").document(x).set(map);
       return Future.value(true);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return Future.value(false);
     }
   }

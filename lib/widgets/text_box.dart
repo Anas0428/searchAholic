@@ -6,7 +6,6 @@ import 'package:shopwise/screens/orders/new_order.dart';
 import 'package:shopwise/utils/imports.dart';
 import 'package:shopwise/screens/orders/sales.dart';
 import 'package:shopwise/screens/dashboard/upload_data.dart';
-import 'package:flutter/cupertino.dart';
 import '../screens/products/add_product.dart';
 import '../models/product.dart';
 

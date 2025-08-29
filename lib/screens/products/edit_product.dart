@@ -18,10 +18,10 @@ class EditProduct extends StatefulWidget {
   EditProduct({super.key, required this.productID, required this.email});
 
   @override
-  _EditProduct createState() => _EditProduct();
+  State<EditProduct> createState() => _EditProductState();
 }
 
-class _EditProduct extends State<EditProduct> {
+class _EditProductState extends State<EditProduct> {
   // Get the Product ID
   String productID = "";
   String email = "";
@@ -242,7 +242,7 @@ class _EditProduct extends State<EditProduct> {
                                     MediaQuery.of(context).size.width * 0.062),
                             child: ElevatedButton(
                               onPressed: () {
-                                print("Add button pressed");
+                                debugPrint("Add button pressed");
                                 if (formkey.currentState!.validate()) {
                                   updateProduct(
                                           _productName.text,
@@ -255,13 +255,16 @@ class _EditProduct extends State<EditProduct> {
                                             if (value)
                                               {
                                                 showAlert1(),
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Product(),
-                                                  ),
-                                                ),
+                                                if (context.mounted)
+                                                  {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Product(),
+                                                      ),
+                                                    )
+                                                  }
                                               }
                                             else
                                               {
@@ -269,7 +272,7 @@ class _EditProduct extends State<EditProduct> {
                                               }
                                           });
                                 } else {
-                                  print("inavlid credentials");
+                                  debugPrint("invalid credentials");
                                 }
                               },
                               style: ElevatedButton.styleFrom(
@@ -305,8 +308,8 @@ Map<String, dynamic> updataingMapValues(
     String productID,
     Map<String, dynamic> map,
     Map productData) {
-  print("-----------------");
-  print(productData);
+  debugPrint("-----------------");
+  debugPrint(productData.toString());
 
   map.update(
       productID,
@@ -348,7 +351,7 @@ Future<bool> updateProduct(String name, String price, String qty, String type,
   // Updating the Product
   await Firestore.instance.collection("Products").document(x).set(map);
 
-  print("Product Updated");
+  debugPrint("Product Updated");
   return Future<bool>.value(true);
 }
 

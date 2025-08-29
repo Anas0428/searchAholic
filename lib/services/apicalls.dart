@@ -1,5 +1,6 @@
 // This contain functions for api calls
 
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -10,11 +11,14 @@ class ApiCall {
 
     PermissionStatus permission = await Permission.location.request();
     if (permission != PermissionStatus.granted) {
-      print("Permission not granted");
+      debugPrint("Permission not granted");
       throw Exception('Location permission not granted');
     }
     Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 100,
+      ),
     );
     return position;
   }

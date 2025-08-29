@@ -260,10 +260,12 @@ class LoginScreen extends State<Login> {
         debugPrint('Navigating to dashboard...');
 
         // Navigate to dashboard without showing success alert first
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Dashboard()),
-        );
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Dashboard()),
+          );
+        }
       } else {
         debugPrint('Login failed');
         _showLoginError();
@@ -281,7 +283,7 @@ class LoginCheck {
 
   LoginCheck(this.email, this.password);
 
-  String Validator() {
+  String validator() {
     if (email.text.isEmpty) {
       return "emptyEmail";
     } else if (password.text.isEmpty) {
@@ -292,17 +294,18 @@ class LoginCheck {
   }
 
   void checkLogin(BuildContext context) {
-    FlutterApi().checkLogin(email.text, password.text).then((value) => {
-          if (value == true)
-            {
+    FlutterApi().checkLogin(email.text, password.text).then((value) {
+          if (value == true) {
               System().setLogin(email.text, password.text).then(
-                    (value) => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Dashboard()),
-                      ),
+                    (value) {
+                      if (context.mounted) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Dashboard()),
+                        );
+                      }
                     },
-                  ),
+                  );
             }
         });
   }

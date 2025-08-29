@@ -96,15 +96,17 @@ class _SignUpState extends State<SignUp> {
         otpLength: 4,
         otpType: OTPType.digitsOnly);
     var res = await myauth.sendOTP();
-    if (res) {
-      showOtpSentSuccess();
-    } else {
-      QuickAlert.show(
-        context: context,
-        type: QuickAlertType.error,
-        title: 'Error',
-        text: 'Failed to send OTP. Please try again.',
-      );
+    if (mounted) {
+      if (res) {
+        showOtpSentSuccess();
+      } else {
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Error',
+          text: 'Failed to send OTP. Please try again.',
+        );
+      }
     }
   }
 
@@ -120,7 +122,7 @@ class _SignUpState extends State<SignUp> {
   @override
   void initState() {
     super.initState();
-    print("Getting Details.......");
+    // Getting Details.......
     setLocation();
   }
 
@@ -348,24 +350,28 @@ class _SignUpState extends State<SignUp> {
                           suffixIcon: TextButton(
                               child: const Text("Send OTP"),
                               onPressed: () async {
-                                if (await FlutterApi()
-                                        .emailCheck(_emailController.text) ==
-                                    true) {
+                                if (_emailController.text.isEmpty ||
+                                    !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(_emailController.text)) {
+                                  QuickAlert.show(
+                                    context: context,
+                                    type: QuickAlertType.error,
+                                    title: 'Error',
+                                    text:
+                                        'Please enter a valid email address first.',
+                                  );
+                                  return;
+                                }
+                                
+                                final emailExists = await FlutterApi()
+                                    .emailCheck(_emailController.text);
+                                
+                                if (!mounted) return;
+                                
+                                if (emailExists) {
                                   showAlert2();
                                 } else {
-                                  if (_emailController.text.isNotEmpty &&
-                                      RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                          .hasMatch(_emailController.text)) {
-                                    sendOTP();
-                                  } else {
-                                    QuickAlert.show(
-                                      context: context,
-                                      type: QuickAlertType.error,
-                                      title: 'Error',
-                                      text:
-                                          'Please enter a valid email address first.',
-                                    );
-                                  }
+                                  sendOTP();
                                 }
                               }),
                           suffix: TextButton(
@@ -399,7 +405,7 @@ class _SignUpState extends State<SignUp> {
                       height: MediaQuery.of(context).size.height * 0.06,
                       child: ElevatedButton(
                         onPressed: () {
-                          print("Register Button Pressed");
+                          // Register Button Pressed
 
                           if (formkey.currentState!.validate()) {
                             FlutterApi().register(
@@ -418,7 +424,7 @@ class _SignUpState extends State<SignUp> {
                             //   showOtpFailure();
                             // }
                           } else {
-                            print("error");
+                            // error
                             showAlert();
                           }
                         },
@@ -531,7 +537,7 @@ class _SignUpState extends State<SignUp> {
 
       _storeLocationLatController.text = "$latitude,$longitude";
     } catch (e) {
-      print('Error getting location: $e');
+      debugPrint('Error getting location: $e');
       _storeLocationLatController.text = "Location unavailable";
     }
   }

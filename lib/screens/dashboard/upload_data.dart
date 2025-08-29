@@ -12,7 +12,7 @@ class UploadData extends StatefulWidget {
   // Removing Title Bar from the App
 
   @override
-  _UploadDataState createState() => _UploadDataState();
+  State<UploadData> createState() => _UploadDataState();
 }
 
 class _UploadDataState extends State<UploadData> {
@@ -89,7 +89,7 @@ class _UploadDataState extends State<UploadData> {
                                         actions: [
                                           TextButton(
                                               onPressed: () {
-                                                print("Cancel the upload");
+                                                debugPrint("Cancel the upload");
                                                 Navigator.of(context).pop();
                                                 // Cancel the upload
                                               },
@@ -104,7 +104,7 @@ class _UploadDataState extends State<UploadData> {
                                                   });
                                                 });
                                                 // wait for 1 second
-                                                print(email);
+                                                debugPrint(email);
 
                                                 FlutterApi()
                                                     .uploadFile(
@@ -118,13 +118,13 @@ class _UploadDataState extends State<UploadData> {
                                                             }
                                                           else
                                                             {
-                                                              print("Error"),
+                                                              debugPrint("Error"),
                                                             }
                                                         });
 
                                                 // To Do: Upload the file to the database
 
-                                                print("Upload the file");
+                                                debugPrint("Upload the file");
                                                 Navigator.of(context).pop();
                                                 // Upload the file to the database
                                               },
@@ -134,7 +134,7 @@ class _UploadDataState extends State<UploadData> {
                                     });
                               });
                             } else {
-                              print("No file selected");
+                              debugPrint("No file selected");
                             }
                           }),
                     ),
