@@ -1,0 +1,12 @@
+{
+  "users": {
+    "test@example.com": {
+      "name": "Test User",
+      "email": "test@example.com",
+      "password": "REPLACE_WITH_YOUR_PASSWORD",
+      "phone": "REPLACE_WITH_PHONE",
+      "address": "REPLACE_WITH_ADDRESS",
+      "storeName": "REPLACE_WITH_STORE_NAME"
+    }
+  }
+}
